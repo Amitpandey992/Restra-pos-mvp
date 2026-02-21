@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden;
+    font-size: 14px;
+  }
+  @screen md {
+    body {
+      font-size: 16px;
+    }
+  }
+}
+
+@layer components {
+  /* Common Responsive Container */
+  .app-container {
+    @apply px-4 md:px-8 max-w-[1600px] mx-auto w-full;
+  }
+
+  /* Responsive Table Wrapper */
+  .table-responsive {
+    @apply overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Sticky Scrollbar Fix for mobile */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom Touch Targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+}
+
+.active-nav {
+  @apply bg-primary text-white shadow-lg shadow-primary/20;
+}
+
+/* Base Form Responsiveness */
+input,
+select,
+textarea {
+  @apply text-base md:text-sm !important; /* Prevents iOS zoom on focus */
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menu Management Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4051b5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14161e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111218]">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-solid border-[#eaebf1] px-6 lg:px-40 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">restaurant_menu</span>
+</div>
+<h1 class="text-[#111218] text-xl font-bold tracking-tight">Menu Management</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-full h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Add New Item</span>
+</button>
+<div class="border-l border-[#eaebf1] h-8 mx-2"></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/10" data-alt="User profile avatar of the restaurant manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCi5fLycOY6W3qu1GryKLN8T-0QH-lRkk6V4dbisXLELgJkxv2lSVi_ZEv8Z9TAKQCs2BNC8jMCcXOEYMrIMDOhVGrLjVoGDXmSLyRjhgoVcLmythJGj_oH-MsOEvctT3Y8EgnM43h7f2TSmxOV2F9xt2gaFE0PD5oDaHt57FuQprdgF1hU4DeDM1fEtY5TGchTNJ90oQRTBLzDPLowQVBxdjcVOlq_WMbLN2AABF2M6RT4Zgf-S3A7bbB0VjWgAwjpqtT32XWlCPs");'></div>
+</div>
+</header>
+<main class="flex-1 px-6 lg:px-40 py-8">
+<div class="max-w-[1000px] mx-auto flex flex-col gap-8">
+<!-- Search and Filters -->
+<div class="flex flex-col gap-6 bg-white p-6 rounded-xl shadow-sm border border-[#eaebf1]">
+<div class="w-full">
+<label class="relative flex items-center w-full">
+<span class="absolute left-4 text-[#5d6389] material-symbols-outlined">search</span>
+<input class="w-full h-12 pl-12 pr-4 rounded-xl border-none bg-background-light text-[#111218] focus:ring-2 focus:ring-primary/20 placeholder:text-[#5d6389] text-base" placeholder="Search by item name, description or price..."/>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+<button class="flex h-10 shrink-0 items-center justify-center px-6 rounded-full bg-primary text-white text-sm font-semibold">All Items</button>
+<button class="flex h-10 shrink-0 items-center justify-center px-6 rounded-full bg-background-light text-[#5d6389] hover:bg-primary/10 hover:text-primary text-sm font-medium transition-colors">Veg</button>
+<button class="flex h-10 shrink-0 items-center justify-center px-6 rounded-full bg-background-light text-[#5d6389] hover:bg-primary/10 hover:text-primary text-sm font-medium transition-colors">Non-Veg</button>
+<button class="flex h-10 shrink-0 items-center justify-center px-6 rounded-full bg-background-light text-[#5d6389] hover:bg-primary/10 hover:text-primary text-sm font-medium transition-colors">Drinks</button>
+</div>
+<div class="hidden md:flex items-center gap-2 text-sm text-[#5d6389]">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>Sort by: <span class="font-bold text-[#111218]">Newest first</span></span>
+</div>
+</div>
+</div>
+<!-- Menu Items List -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-lg font-bold text-[#111218]">Active Menu <span class="text-[#5d6389] font-normal text-sm ml-2">(24 Items)</span></h2>
+</div>
+<!-- Item Card 1 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 bg-white p-5 rounded-xl border border-[#eaebf1] hover:border-primary/30 transition-all shadow-sm">
+<div class="relative size-24 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover" data-alt="Plate of Paneer Tikka with garnishing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2ZLGD207H4uYpvuvTopl0X19wtSzWcfr-WGJVGJmOoYQCxHq0vxgT5RiXY-Z8Dz7j0tF-wM_7p1_XmQwWc_1JS6eJphmLWwvI8aceB3B_ye3wi54qtDlF9-rAAHAVDFm3yDv7lmVlLKNGRNXvHoCK_T--nOLwlAoODPCKhE8zuvhM94VErF83177jiCWHGvIapx9nWDxEXWmfJAg1eqLb0Dk-EOI65MwIWrF9Qb9zzAAQGimF73xdm0hcdpoVJ5VgmPW-OX1m274"/>
+<div class="absolute top-1 right-1 bg-green-500 size-3 rounded-full border-2 border-white shadow-sm" title="Veg"></div>
+</div>
+<div class="flex flex-1 flex-col gap-1 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-2">
+<h3 class="text-lg font-bold text-[#111218]">Paneer Tikka</h3>
+<span class="px-2 py-0.5 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider rounded border border-green-100">Veg</span>
+</div>
+<p class="text-[#5d6389] text-sm line-clamp-1">Succulent cottage cheese cubes marinated in spices and grilled to perfection.</p>
+<div class="flex items-center justify-center md:justify-start gap-3 mt-1">
+<span class="text-primary font-bold text-lg">$12.99</span>
+<span class="text-[#5d6389] text-xs px-2 py-1 bg-background-light rounded-md">Starters</span>
+</div>
+</div>
+<div class="flex flex-row md:flex-col items-center gap-4 md:gap-2 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-[#eaebf1] md:pl-6 w-full md:w-auto justify-between md:justify-center">
+<div class="flex flex-col items-center md:items-end gap-1">
+<span class="text-[10px] font-bold text-[#5d6389] uppercase">Status</span>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full border-none bg-primary p-1 transition-colors">
+<div class="h-5 w-5 rounded-full bg-white translate-x-5" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+<input checked="" class="hidden" type="checkbox"/>
+</label>
+<span class="text-[10px] font-medium text-primary">Available</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-[#5d6389] hover:bg-background-light rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-[#5d6389] hover:bg-red-50 hover:text-red-500 rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item Card 2 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 bg-white p-5 rounded-xl border border-[#eaebf1] hover:border-primary/30 transition-all shadow-sm">
+<div class="relative size-24 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="Plate of Butter Chicken with naan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQgLxCYuyCd-j1OcL4UctHit480TqsmI-cDz_HO9DAxPSyAR7yG469u3qCyASYThCfY0i9o6eLzLg42rl7tZvZOw1zQ-AyaRGvC-TZ8IesWUQD3zQcU3d3zzKqevQVMXk09wKq75C9nil018qZ7WwCmO2tE3NEolxskKx1aPSCBZXbiBaTfWoQ6LWZ9cQt8VhOpsNFOtTysD9U1wsaB66GGrDqOGV2Csjxx_AxndlGEJNtE18XRQdzqXXmxxA9jeWDT8KppSB4cOA"/>
+<div class="absolute top-1 right-1 bg-red-500 size-3 rounded-full border-2 border-white shadow-sm" title="Non-Veg"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="text-white text-[10px] font-bold uppercase tracking-widest bg-black/60 px-2 py-1 rounded">Out of Stock</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-1 text-center md:text-left opacity-60">
+<div class="flex items-center justify-center md:justify-start gap-2">
+<h3 class="text-lg font-bold text-[#111218]">Butter Chicken</h3>
+<span class="px-2 py-0.5 bg-red-50 text-red-700 text-[10px] font-bold uppercase tracking-wider rounded border border-red-100">Non-Veg</span>
+</div>
+<p class="text-[#5d6389] text-sm line-clamp-1">Classic creamy tomato based curry with tender chicken pieces.</p>
+<div class="flex items-center justify-center md:justify-start gap-3 mt-1">
+<span class="text-primary font-bold text-lg">$15.50</span>
+<span class="text-[#5d6389] text-xs px-2 py-1 bg-background-light rounded-md">Main Course</span>
+</div>
+</div>
+<div class="flex flex-row md:flex-col items-center gap-4 md:gap-2 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-[#eaebf1] md:pl-6 w-full md:w-auto justify-between md:justify-center">
+<div class="flex flex-col items-center md:items-end gap-1">
+<span class="text-[10px] font-bold text-[#5d6389] uppercase">Status</span>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full border-none bg-[#eaebf1] p-1 transition-colors">
+<div class="h-5 w-5 rounded-full bg-white" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+<input class="hidden" type="checkbox"/>
+</label>
+<span class="text-[10px] font-medium text-[#5d6389]">Sold Out</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-[#5d6389] hover:bg-background-light rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-[#5d6389] hover:bg-red-50 hover:text-red-500 rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item Card 3 -->
+<div class="group flex flex-col md:flex-row items-center gap-6 bg-white p-5 rounded-xl border border-[#eaebf1] hover:border-primary/30 transition-all shadow-sm">
+<div class="relative size-24 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover" data-alt="Freshly made Mojito cocktail with lime and mint" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8r4WmyjdvtI2paJelbsbpPgj1hLXscupd5yv-SI7W2umT7PMHra10sy3gWwP_W-2QMSts0hOjE_iOARtfOEUFehRaN0ZA5fhyaCeO6MlQvTujgQoHhL4OOco8ctETnPcOgAati7ilQkwUYChvagMFbUNxKeNkSEVgQMOsOSsunkRNKb4M8AnOprE1TmYg90JJ5Me3L7O2vlY1vy40JGXXos5cN-6zyNYl8PAsIehciw5suvfR6LuebFh5c0cXTr3tsnRt7oIb2wI"/>
+<div class="absolute top-1 right-1 bg-blue-500 size-3 rounded-full border-2 border-white shadow-sm" title="Drink"></div>
+</div>
+<div class="flex flex-1 flex-col gap-1 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-2">
+<h3 class="text-lg font-bold text-[#111218]">Fresh Mint Mojito</h3>
+<span class="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider rounded border border-blue-100">Drink</span>
+</div>
+<p class="text-[#5d6389] text-sm line-clamp-1">Refreshing blend of fresh mint, lime, sugar and sparkling soda.</p>
+<div class="flex items-center justify-center md:justify-start gap-3 mt-1">
+<span class="text-primary font-bold text-lg">$6.00</span>
+<span class="text-[#5d6389] text-xs px-2 py-1 bg-background-light rounded-md">Beverage</span>
+</div>
+</div>
+<div class="flex flex-row md:flex-col items-center gap-4 md:gap-2 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-[#eaebf1] md:pl-6 w-full md:w-auto justify-between md:justify-center">
+<div class="flex flex-col items-center md:items-end gap-1">
+<span class="text-[10px] font-bold text-[#5d6389] uppercase">Status</span>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full border-none bg-primary p-1 transition-colors">
+<div class="h-5 w-5 rounded-full bg-white translate-x-5" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+<input checked="" class="hidden" type="checkbox"/>
+</label>
+<span class="text-[10px] font-medium text-primary">Available</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-[#5d6389] hover:bg-background-light rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-[#5d6389] hover:bg-red-50 hover:text-red-500 rounded-full transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Statistics Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-12">
+<div class="bg-white p-4 rounded-xl border border-[#eaebf1] shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-[#5d6389] uppercase tracking-wider">Total Items</span>
+<span class="text-2xl font-black text-[#111218]">142</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-[#eaebf1] shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-[#5d6389] uppercase tracking-wider">Available</span>
+<span class="text-2xl font-black text-green-600">128</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-[#eaebf1] shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-[#5d6389] uppercase tracking-wider">Sold Out</span>
+<span class="text-2xl font-black text-red-500">14</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-[#eaebf1] shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-[#5d6389] uppercase tracking-wider">Updates Today</span>
+<span class="text-2xl font-black text-primary">5</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Floating Action Button for Mobile -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="size-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4051b5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14161e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111218]">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white px-6 md:px-20 py-4">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+</div>
+<h2 class="text-[#111218] text-xl font-bold leading-tight tracking-tight">StockMaster</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-64 !h-11">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full">
+<div class="text-[#5d6389] flex border-none bg-primary/5 items-center justify-center pl-4 rounded-l-full" data-icon="search">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-full text-[#111218] focus:outline-0 focus:ring-0 border-none bg-primary/5 placeholder:text-[#5d6389] px-4 pl-2 text-base font-normal" placeholder="Search ingredients..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-11 px-5 bg-primary text-white text-sm font-bold leading-normal transition-all hover:bg-primary/90">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="truncate">Add Ingredient</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-11 border-2 border-primary/20" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAC4BwEpu2EWj-u1Vwiy2p_XJbyrRl6f5UOvf4opIIzVC0uUEqw_FhIdEQ-q2czGDgUPw4aNE6OH9UZUlNvLC4a_SsiSZMpl5ZS_u8pp_xqiwzPZ0TR9_JJFwh_vcv_fc03P90teumOyAZBLj1Ok-5oSGBqvkG2qxTyEUCE-YUgGk3XxOMJQkgLUjyr25erHdGQXItH2AlVGyaax_jBXd3xqqOFwvhhT4mU55eIZBxubiu8fqXvR61eEKQZWBD9UFGBceqJR007ZX8");'></div>
+</div>
+</header>
+<main class="flex flex-1 flex-col px-6 md:px-20 py-8 max-w-[1400px] mx-auto w-full">
+<!-- Summary Metrics Cards -->
+<div class="flex flex-wrap gap-4 mb-8">
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-xl bg-white p-6 shadow-sm border border-primary/5">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary">list_alt</span>
+</div>
+<p class="text-[#5d6389] text-sm font-medium">Total Items</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111218] text-3xl font-bold">124</p>
+<span class="text-green-600 text-sm font-semibold">+2%</span>
+</div>
+</div>
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-xl bg-white p-6 shadow-sm border border-primary/5">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-amber-100 rounded-full">
+<span class="material-symbols-outlined text-amber-600">warning</span>
+</div>
+<p class="text-[#5d6389] text-sm font-medium">Low Stock Items</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111218] text-3xl font-bold">8</p>
+<span class="text-amber-600 text-sm font-semibold">+1%</span>
+</div>
+</div>
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-xl bg-white p-6 shadow-sm border border-primary/5">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-red-100 rounded-full">
+<span class="material-symbols-outlined text-red-600">error</span>
+</div>
+<p class="text-[#5d6389] text-sm font-medium">Out of Stock</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111218] text-3xl font-bold">3</p>
+<span class="text-red-600 text-sm font-semibold">-5%</span>
+</div>
+</div>
+</div>
+<!-- Main Inventory Table -->
+<div class="bg-white rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+<div class="px-6 py-4 border-b border-primary/5 flex justify-between items-center bg-white">
+<h3 class="text-lg font-bold text-[#111218]">Ingredient Inventory</h3>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/10 text-sm font-medium text-[#5d6389] hover:bg-primary/5">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                                Filter
+                            </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/10 text-sm font-medium text-[#5d6389] hover:bg-primary/5">
+<span class="material-symbols-outlined text-lg">download</span>
+                                Export
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-primary/5">
+<th class="px-6 py-4 text-sm font-semibold text-primary">Ingredient</th>
+<th class="px-6 py-4 text-sm font-semibold text-primary">Current Stock</th>
+<th class="px-6 py-4 text-sm font-semibold text-primary">Min Stock</th>
+<th class="px-6 py-4 text-sm font-semibold text-primary text-center">Status</th>
+<th class="px-6 py-4 text-sm font-semibold text-primary text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<!-- Row 1 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/5 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary">nutrition</span>
+</div>
+<div>
+<p class="text-[#111218] font-semibold text-base">Tomato</p>
+<p class="text-[#5d6389] text-xs">Fresh Produce</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-[#111218] font-bold text-base">15 kg</p>
+</td>
+<td class="px-6 py-5 text-[#5d6389] font-medium">10 kg</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider">
+                                            In Stock
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="h-9 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">Add</button>
+<button class="h-9 px-4 rounded-full border border-primary/10 text-[#5d6389] text-sm font-bold hover:bg-primary/5 transition-all">Adjust</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/5 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary">bakery_dining</span>
+</div>
+<div>
+<p class="text-[#111218] font-semibold text-base">Flour</p>
+<p class="text-[#5d6389] text-xs">Dry Goods</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-[#111218] font-bold text-base">2 kg</p>
+</td>
+<td class="px-6 py-5 text-[#5d6389] font-medium">5 kg</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase tracking-wider">
+                                            Low Stock
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="h-9 px-4 rounded-full bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 hover:bg-primary/90 transition-all">Add</button>
+<button class="h-9 px-4 rounded-full border border-primary/10 text-[#5d6389] text-sm font-bold hover:bg-primary/5 transition-all">Adjust</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-red-50/50 transition-colors group bg-red-50/20">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-red-600">water_drop</span>
+</div>
+<div>
+<p class="text-[#111218] font-semibold text-base">Milk</p>
+<p class="text-[#5d6389] text-xs">Dairy</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-red-600 font-bold text-base">0 L</p>
+</td>
+<td class="px-6 py-5 text-[#5d6389] font-medium">2 L</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider">
+                                            Out of Stock
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="h-9 px-4 rounded-full bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 hover:bg-primary/90 transition-all">Add</button>
+<button class="h-9 px-4 rounded-full border border-primary/10 text-[#5d6389] text-sm font-bold hover:bg-primary/5 transition-all">Adjust</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/5 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary">egg</span>
+</div>
+<div>
+<p class="text-[#111218] font-semibold text-base">Eggs</p>
+<p class="text-[#5d6389] text-xs">Dairy &amp; Eggs</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-[#111218] font-bold text-base">48 units</p>
+</td>
+<td class="px-6 py-5 text-[#5d6389] font-medium">24 units</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider">
+                                            In Stock
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="h-9 px-4 rounded-full bg-primary/10 text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all">Add</button>
+<button class="h-9 px-4 rounded-full border border-primary/10 text-[#5d6389] text-sm font-bold hover:bg-primary/5 transition-all">Adjust</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-primary/5 flex items-center justify-between text-[#5d6389] text-sm font-medium">
+<p>Showing 4 of 124 ingredients</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-full border border-primary/10 hover:bg-primary/5 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-4 py-2 rounded-full border border-primary/10 hover:bg-primary/5">Next</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity Section -->
+<div class="mt-12">
+<h2 class="text-[#111218] text-xl font-bold leading-tight tracking-tight mb-6">Recent Adjustments</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex gap-4 p-4 rounded-xl bg-white shadow-sm border border-primary/5">
+<div class="flex flex-col items-center">
+<div class="bg-green-100 p-2 rounded-full text-green-600">
+<span class="material-symbols-outlined">add_circle</span>
+</div>
+<div class="w-[1.5px] bg-primary/10 h-full mt-1"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-[#111218] font-semibold">Stock Added: Tomato (+5 kg)</p>
+<p class="text-[#5d6389] text-sm">2 hours ago • Updated by Chef Mario</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-white shadow-sm border border-primary/5">
+<div class="flex flex-col items-center">
+<div class="bg-amber-100 p-2 rounded-full text-amber-600">
+<span class="material-symbols-outlined">edit</span>
+</div>
+<div class="w-[1.5px] bg-primary/10 h-full mt-1"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-[#111218] font-semibold">Stock Adjusted: Flour (-1 kg)</p>
+<p class="text-[#5d6389] text-sm">5 hours ago • Daily consumption log</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Floating Action for Mobile (Optional) -->
+<div class="md:hidden fixed bottom-6 right-6">
+<button class="size-14 rounded-full bg-primary text-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

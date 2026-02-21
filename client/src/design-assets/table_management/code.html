@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Table Management System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4051b5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14161e",
+                        "status-available": "#4caf50",
+                        "status-occupied": "#f44336",
+                        "status-cleaning": "#ff9800",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header Section -->
+<header class="flex items-center justify-between border-b border-solid border-primary/10 bg-white dark:bg-background-dark/50 px-6 py-4 lg:px-20">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Table Management</h2>
+<p class="text-xs text-slate-500 font-medium">Main Dining Floor • 12:45 PM</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Floor Plan</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Orders</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Staff</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar of the manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAi0OSB8ntnwW2l4xE255IJjBqc2YP3XxqCreK-NKSBXsImkuSsT4CTpu7LHY0Je7dw6rqaUYC9sKawC96o44qqNlsNzlGczRuLyIqrbthE6-iTMHP50APXqbW-kp9R-kRqWyGzokcSGZGfL4FpM4gPLfHNoh8UaxLhCYtkfkHXmvO66Ocyyyh9j6kKs-w1DSnwjEvNnvG5ScENhM5sQOOZ_O-6redQfb_S6aCTE8zeHHGTVxik938fk_RkBDYYUM4L37esZA-MA4");'>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 py-8 lg:px-20 max-w-[1440px] mx-auto w-full">
+<!-- Breadcrumbs & Stats -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 text-slate-400 text-sm">
+<span>Dashboard</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">Floor Plan</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight">Overview</h1>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-6 text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+                            Add Table
+                        </button>
+<button class="flex h-10 items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">settings</span>
+                            Edit Layout
+                        </button>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-white text-sm font-semibold">
+<span>All Tables</span>
+<span class="bg-white/20 px-2 py-0.5 rounded-full text-xs">12</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-status-available transition-colors">
+<div class="size-2 rounded-full bg-status-available"></div>
+<span>Available</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full text-xs">6</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-status-occupied transition-colors">
+<div class="size-2 rounded-full bg-status-occupied"></div>
+<span>Occupied</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full text-xs">4</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:border-status-cleaning transition-colors">
+<div class="size-2 rounded-full bg-status-cleaning"></div>
+<span>Cleaning</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full text-xs">2</span>
+</button>
+</div>
+<!-- Table Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+<!-- Table 1 - Available -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-available/20 rounded-xl p-6 hover:shadow-xl hover:border-status-available transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T1</span>
+<span class="bg-status-available/10 text-status-available text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Available</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Capacity: 4 Seats</p>
+<p class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                Open Order <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</p>
+</div>
+</button>
+<!-- Table 2 - Occupied -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-occupied/20 rounded-xl p-6 hover:shadow-xl hover:border-status-occupied transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T2</span>
+<span class="bg-status-occupied/10 text-status-occupied text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Occupied</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Time: 45m • $124.50</p>
+<div class="flex -space-x-2">
+<div class="size-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200" data-alt="Guest avatar silhouette"></div>
+<div class="size-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-300" data-alt="Guest avatar silhouette"></div>
+<div class="size-6 rounded-full border-2 border-white dark:border-slate-800 bg-primary/20 text-[10px] flex items-center justify-center font-bold text-primary">+2</div>
+</div>
+</div>
+</button>
+<!-- Table 3 - Cleaning -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-cleaning/20 rounded-xl p-6 hover:shadow-xl hover:border-status-cleaning transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T3</span>
+<span class="bg-status-cleaning/10 text-status-cleaning text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Cleaning</span>
+</div>
+<div class="mt-auto flex items-center gap-2">
+<span class="material-symbols-outlined text-status-cleaning text-sm animate-spin">mop</span>
+<p class="text-slate-400 text-xs font-medium italic">Estimated: 5m</p>
+</div>
+</button>
+<!-- Table 4 - Available -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-available/20 rounded-xl p-6 hover:shadow-xl hover:border-status-available transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T4</span>
+<span class="bg-status-available/10 text-status-available text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Available</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Capacity: 2 Seats</p>
+<p class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                Open Order <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</p>
+</div>
+</button>
+<!-- Table 5 - Occupied -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-occupied/20 rounded-xl p-6 hover:shadow-xl hover:border-status-occupied transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T5</span>
+<span class="bg-status-occupied/10 text-status-occupied text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Occupied</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Time: 1h 20m • $258.00</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-status-occupied text-sm">warning</span>
+<span class="text-status-occupied text-[10px] font-bold">Long Stay</span>
+</div>
+</div>
+</button>
+<!-- Table 6 - Available -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-available/20 rounded-xl p-6 hover:shadow-xl hover:border-status-available transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T6</span>
+<span class="bg-status-available/10 text-status-available text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Available</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Capacity: 6 Seats</p>
+<p class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                Open Order <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</p>
+</div>
+</button>
+<!-- T7 Placeholder -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-available/20 rounded-xl p-6 hover:shadow-xl hover:border-status-available transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T7</span>
+<span class="bg-status-available/10 text-status-available text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Available</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium mb-1">Capacity: 4 Seats</p>
+<p class="text-primary text-sm font-bold">Open Order</p>
+</div>
+</button>
+<!-- T8 Placeholder (Cleaning) -->
+<button class="group flex flex-col bg-white dark:bg-slate-800 border-2 border-status-cleaning/20 rounded-xl p-6 hover:shadow-xl hover:border-status-cleaning transition-all text-left">
+<div class="flex justify-between items-start mb-4">
+<span class="text-3xl font-black text-slate-800 dark:text-white">T8</span>
+<span class="bg-status-cleaning/10 text-status-cleaning text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">Cleaning</span>
+</div>
+<div class="mt-auto">
+<p class="text-slate-400 text-xs font-medium italic">Ready in 2m</p>
+</div>
+</button>
+<!-- Additional Tables to fill grid -->
+<div class="hidden xl:flex flex-col bg-slate-100 dark:bg-slate-800/30 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-6 items-center justify-center text-slate-400 gap-2 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-4xl">add_circle</span>
+<span class="text-xs font-bold uppercase">New Spot</span>
+</div>
+</div>
+</main>
+<!-- Status Legend Footer -->
+<footer class="sticky bottom-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-4 lg:px-20">
+<div class="flex flex-wrap items-center justify-between gap-6">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-status-available"></div>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">Available</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-status-occupied"></div>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">Occupied</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-status-cleaning"></div>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">Cleaning</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+<p>Occupancy: 33%</p>
+<p>Turnover Rate: 1.2h</p>
+<p>Active Staff: 8</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

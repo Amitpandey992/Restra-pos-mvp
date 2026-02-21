@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4051b5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#14161e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>Room Management Dashboard</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111218]">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white px-6 md:px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<h2 class="text-[#111218] text-xl font-bold leading-tight tracking-[-0.015em]">Room Management</h2>
+</div>
+<!-- Search Bar -->
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full">
+<div class="text-primary/60 flex border-none bg-primary/5 items-center justify-center pl-4 rounded-l-full" data-icon="search">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-full text-[#111218] focus:outline-0 focus:ring-0 border-none bg-primary/5 focus:border-none h-full placeholder:text-primary/40 px-4 pl-2 text-sm font-normal" placeholder="Search rooms..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar of a manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuUH-gsVjUuNFE2JfBitZv7U3Z-JDR0ah-AGTcBGc-VNJ2zGR8MXI3f8nWCCvn_L3MgXnCOOmNHwN113DVeX5KGB3Fzt99QF0gLKaqLa6OyD3tLgm1EMuX0FDCjPnCdlXXYf11QfSc-xdt-4-qqymOqi3DzX2saTaHMSbpF8v_ASeG31kX0119eH-UGX6mVnox_SxVd9b_jDuWkha6pqsVwTgmJF1mLA9ZdPhYdd6aQlB4XH_2TWXkysrihVZpG5GTbuKavCi7rlU");'></div>
+</div>
+</header>
+<main class="px-6 md:px-20 py-8 flex-1">
+<!-- Filters and Quick Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div class="flex border-b border-primary/10 px-1 gap-6">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-2" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">All Rooms</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-gray-500 pb-3 pt-2 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">VIP Suites</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-gray-500 pb-3 pt-2 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Outdoor Spaces</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-gray-500 pb-3 pt-2 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Private Halls</p>
+</a>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center gap-2 px-6 h-11 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span>Booking Calendar</span>
+</button>
+<button class="flex items-center justify-center gap-2 px-6 h-11 bg-white border border-primary/20 text-primary rounded-full font-bold text-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add Room</span>
+</button>
+</div>
+</div>
+<!-- Room Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Room Card 1 -->
+<div class="bg-white rounded-xl overflow-hidden border border-primary/5 shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative h-56 w-full bg-cover bg-center" data-alt="Modern luxury VIP conference room" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLF-6K2syHanzTBy_ubof8SwCn5gmVwW8kyuJhshlQzOl6ws90JiEgpCzBMj2bmzfjfDXqohguUA-5MzwecA1ZVIGH4rqd4jmmRi991kuxvLmz5eaZaE1Yxeq8SlrqkeIB5mDpdN7UXGry4e7m65TT60B-s1wU-41xXh4u1OvhAB-88DJo5jw_uSNW0imsFDnZMbSi_As6NSchyTkwqXxBYZjx8DZXXmCNo4XTbwxPJJvbbQBXvMnY6Yxcwu6kicGaubdGf5I2dxw");'>
+<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full flex items-center gap-1">
+<span class="size-2 bg-white rounded-full animate-pulse"></span>
+                                Available
+                            </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-[#111218]">VIP Executive Suite 1</h3>
+<p class="text-primary font-bold">$150/hr</p>
+</div>
+<p class="text-gray-500 text-sm mb-4">Floor 4 • Premium Wing</p>
+<div class="flex items-center gap-4 text-gray-400 mb-6">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+<span class="text-xs">Seats 12</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="text-xs">Fast WiFi</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+<span class="text-xs">AV Ready</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 h-10 bg-primary text-white font-bold rounded-full text-sm hover:opacity-90 transition-opacity">Book Now</button>
+<button class="w-10 h-10 border border-primary/20 text-primary rounded-full flex items-center justify-center hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Room Card 2 -->
+<div class="bg-white rounded-xl overflow-hidden border border-primary/5 shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative h-56 w-full bg-cover bg-center" data-alt="Spacious outdoor deck with tables and plants" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCFVBU0u5HZ9Rql50cVAh5hJX5Ro0e8jKzGYpDi2NzNL30BpfamA6iwHaT0VlM6hcwQMY2XxW3twWWo9TeL5t64fFDHLZX_yXNXMorbDYZSBs4Dw_rPCWm-5nf7_Cv6K0eCP_lEvFoYXmx4HbTeIYftSDJuCKk21R6n-HuahrcNd1n5_ckAAEdyCk-toi8cXOqwYZDe_s7IwfdJ1fz2isnlaDKH4lu6IMOPzixHfChUBCSeh2X3foVJ50FAth5Zca-XvFB61PwFWsM");'>
+<div class="absolute top-4 right-4 px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full flex items-center gap-1">
+<span class="size-2 bg-white rounded-full"></span>
+                                Occupied
+                            </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-[#111218]">Skyline Outdoor Deck</h3>
+<p class="text-primary font-bold">$200/hr</p>
+</div>
+<p class="text-gray-500 text-sm mb-4">Rooftop • West Tower</p>
+<div class="flex items-center gap-4 text-gray-400 mb-6">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+<span class="text-xs">Seats 40</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+<span class="text-xs">Sound System</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">sunny</span>
+<span class="text-xs">Open Air</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 h-10 bg-gray-100 text-gray-500 font-bold rounded-full text-sm cursor-not-allowed">Scheduled Until 4PM</button>
+<button class="w-10 h-10 border border-primary/20 text-primary rounded-full flex items-center justify-center hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Room Card 3 -->
+<div class="bg-white rounded-xl overflow-hidden border border-primary/5 shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative h-56 w-full bg-cover bg-center" data-alt="Large private event hall with elegant lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAM7ZtKX6nmZLSSRGtQaJdduHWiMgQIyeZiYEyfDf5NRklrxup2eaT2gfqKNsz1FqcIAEdcCN01RSvAhs5nkSK0cuvStsFZizX8LWsFqdvodacGX30k4uRWb3R6RzQkB6a56jjXa6KMuyc8sigQvC2yb0V-sdDmw-6UFPk0mqyXOK2ZROYPHkXeRnHtMvKCY7Ze4gl9H6E4IKkJneAAk18xAf1a5BQBeV3-RP-BuNTeUipemhl7NUHVi4R39e_WuSOLkIbdxwLPIC4");'>
+<div class="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full flex items-center gap-1">
+<span class="size-2 bg-white rounded-full animate-pulse"></span>
+                                Available
+                            </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-[#111218]">Grand Private Hall</h3>
+<p class="text-primary font-bold">$500/hr</p>
+</div>
+<p class="text-gray-500 text-sm mb-4">Ground Floor • Main Hall</p>
+<div class="flex items-center gap-4 text-gray-400 mb-6">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+<span class="text-xs">Seats 100</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">local_bar</span>
+<span class="text-xs">Full Bar</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+<span class="text-xs">Catering</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 h-10 bg-primary text-white font-bold rounded-full text-sm hover:opacity-90 transition-opacity">Book Now</button>
+<button class="w-10 h-10 border border-primary/20 text-primary rounded-full flex items-center justify-center hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Stats -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Total Rooms</p>
+<p class="text-2xl font-bold text-[#111218]">24</p>
+</div>
+<div class="bg-green-50 p-6 rounded-xl border border-green-100">
+<p class="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">Available Now</p>
+<p class="text-2xl font-bold text-green-700">18</p>
+</div>
+<div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+<p class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">Occupied</p>
+<p class="text-2xl font-bold text-amber-700">6</p>
+</div>
+<div class="bg-white p-6 rounded-xl border border-primary/10 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">System Health</p>
+<p class="text-lg font-bold text-[#111218]">Optimal</p>
+</div>
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- Booking Modal (Simplified Representation) -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-opacity">
+<div class="bg-white w-full max-w-md rounded-xl shadow-2xl overflow-hidden transform scale-95 transition-transform">
+<div class="bg-primary p-6 text-white flex justify-between items-center">
+<h3 class="text-xl font-bold">New Booking</h3>
+<span class="material-symbols-outlined cursor-pointer">close</span>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Selected Room</label>
+<div class="p-3 bg-gray-50 rounded-lg font-medium">VIP Executive Suite 1</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Date</label>
+<input class="w-full rounded-lg border-gray-200 focus:border-primary focus:ring-primary" type="date"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Time</label>
+<input class="w-full rounded-lg border-gray-200 focus:border-primary focus:ring-primary" type="time"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1">Customer Name</label>
+<input class="w-full rounded-lg border-gray-200 focus:border-primary focus:ring-primary" placeholder="John Doe" type="text"/>
+</div>
+<button class="w-full h-12 bg-primary text-white font-bold rounded-full mt-4 hover:opacity-90 transition-opacity">Confirm Booking</button>
+</div>
+</div>
+</div>
+</body></html>
