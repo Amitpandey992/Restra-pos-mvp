@@ -76,7 +76,7 @@ User.init(
     },
     tenant_id: {
       type: DataTypes.UUID,
-      allowNull: false, // Enforced for tenant isolation
+      allowNull: true, // Nullable for Platform admins
     },
     is_active: {
       type: DataTypes.BOOLEAN,

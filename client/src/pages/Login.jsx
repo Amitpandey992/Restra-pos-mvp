@@ -33,17 +33,17 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-primary/10">
-        <div className="bg-primary p-8 text-center">
-          <div className="mx-auto w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
-            <Utensils className="w-8 h-8 text-white" />
+        <div className="bg-primary p-6 md:p-8 text-center">
+          <div className="mx-auto w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
+            <Utensils className="w-6 h-6 md:w-8 md:h-8 text-white" />
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-          <p className="text-primary-100 text-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Welcome Back</h2>
+          <p className="text-primary-100 text-white text-sm md:text-base">
             Sign in to manage your restaurant
           </p>
         </div>
 
-        <div className="p-8">
+        <div className="p-6 md:p-8">
           {error && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm rounded">
               {error}
@@ -120,6 +120,53 @@ const Login = () => {
               {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
+        </div>
+
+        <div className="p-6 md:p-8">
+          {/* Add user and role selection - pre-filled for demo */}
+          <div className="mb-4 md:mb-6">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Select User (Demo)
+            </label>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail(["[EMAIL_ADDRESS]", "[EMAIL_ADDRESS]"][Math.floor(Math.random() * 2)]);
+                  setPassword("password123");
+                  alert("Select a user and click Sign In");
+                }}
+                className="flex-1 py-2 px-4 rounded-lg border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 transition-all text-sm"
+              >
+                Random User
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("owner@gmail.com");
+                  setPassword("password123");
+                }}
+                className="flex-1 py-2 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-sm"
+              >
+                Owner
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("staff@gmail.com");
+                  setPassword("password123");
+                }}
+                className="flex-1 py-2 px-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-sm"
+              >
+                Staff
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
+              Pre-filled with demo accounts: <br />
+              - Owner: [EMAIL_ADDRESS] | password123 <br />
+              - Staff: [EMAIL_ADDRESS] | password123
+            </p>
+          </div>
         </div>
 
         <div className="bg-slate-50 dark:bg-slate-800/50 p-4 text-center text-sm text-slate-500 border-t border-slate-100 dark:border-slate-800">

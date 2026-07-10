@@ -8,6 +8,7 @@ export const validate =
       schema.parse(req.body);
       next();
     } catch (error: any) {
+      console.log(error);
       let message = "Validation Error";
       let errors = [];
 

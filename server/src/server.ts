@@ -1,4 +1,4 @@
-import app, { httpServer } from "./app";
+import { httpServer } from "./app";
 import { config } from "./config/config";
 import { connectDB } from "./config/database";
 

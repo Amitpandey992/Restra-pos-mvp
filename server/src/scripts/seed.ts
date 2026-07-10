@@ -75,7 +75,22 @@ async function seed() {
       role_id: ownerRole.id,
       tenant_id: tenant.id,
       is_active: true,
+      is_verified: true,
     } as any);
+
+    // 4b. Create Super Admin User
+    const superAdminRole = await Role.findOne({ where: { name: "SUPER_ADMIN" } });
+    if (superAdminRole) {
+      await User.create({
+        full_name: "Super Admin",
+        email: "superadmin@gmail.com",
+        password: "superadmin@123",
+        role_id: superAdminRole.id,
+        tenant_id: null,
+        is_active: true,
+        is_verified: true,
+      } as any);
+    }
 
     // 5. Create Tables
     await Table.bulkCreate([
@@ -305,7 +320,8 @@ async function seed() {
     ]);
 
     console.log("Seeding complete!");
-    console.log("Login with: owner@tastybytes.com / password123");
+    console.log("Owner Login: owner@tastybytes.com / password123");
+    console.log("Super Admin Login: superadmin@gmail.com / superadmin@123");
   } catch (error) {
     console.error("Seeding failed:", error);
   } finally {

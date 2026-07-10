@@ -13,7 +13,6 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import clsx from "clsx";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -72,11 +71,11 @@ const Signup = () => {
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-primary/10 flex flex-col md:flex-row">
         {/* Sidebar Info */}
-        <div className="bg-primary p-8 text-white md:w-1/3 flex flex-col justify-center">
+        <div className="bg-primary p-6 md:p-8 text-white md:w-5/12 flex flex-col justify-center">
           <div className="mx-auto w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-6">
             <Utensils className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-2xl font-bold mb-4">Start Your Journey</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-4">Start Your Journey</h2>
           <p className="text-primary-100 text-sm leading-relaxed mb-6">
             Join thousands of restaurants managing their business with
             TastyBytes.
@@ -96,20 +95,20 @@ const Signup = () => {
         </div>
 
         {/* Signup Form */}
-        <div className="p-8 md:flex-1">
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6">
+        <div className="p-6 md:p-8 md:flex-1">
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-6">
             Create Your Business Account
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Tenant Section */}
-              <div className="col-span-2">
+              <div className="col-span-1 md:col-span-2">
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Company Details
                 </label>
               </div>
-              <div className="col-span-2 relative">
+              <div className="col-span-1 md:col-span-2 relative">
                 <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   required
@@ -125,13 +124,13 @@ const Signup = () => {
                 />
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-1 md:col-span-2">
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Owner Details
                 </label>
               </div>
 
-              <div className="relative">
+              <div className="relative col-span-1 md:col-span-2">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   required
@@ -147,7 +146,7 @@ const Signup = () => {
                 />
               </div>
 
-              <div className="relative">
+              <div className="relative col-span-1 md:col-span-2">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type="email"
@@ -157,14 +156,13 @@ const Signup = () => {
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      user: { ...formData.user, email: e.target.value },
                     })
                   }
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-950 focus:ring-2 focus:ring-primary/20 outline-none"
                 />
               </div>
 
-              <div className="col-span-2 relative">
+              <div className="col-span-1 md:col-span-2 relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type={passwordVisible ? "text" : "password"}
@@ -192,7 +190,7 @@ const Signup = () => {
                 </button>
               </div>
 
-              {/* <div className="col-span-2">
+              <div className="col-span-1 md:col-span-2">
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Select Plan
                 </label>
@@ -212,12 +210,12 @@ const Signup = () => {
                     </option>
                   ))}
                 </select>
-              </div> */}
+              </div>
             </div>
 
             <button
               type="submit"
-              disabled={loading || plans.length === 0}
+              // disabled={loading || plans.length === 0}
               className="w-full py-4 bg-primary hover:bg-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 mt-4"
             >
               {loading ? "Creating Account..." : "Create Tenant Account"}
