@@ -3,4 +3,4 @@ i'm going to build an application for restaurants that can manage inventory in r
 
 it should work like this -
 
-customer 
+customer dd

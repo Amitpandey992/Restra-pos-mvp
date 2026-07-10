@@ -7,9 +7,17 @@ const sequelize = new Sequelize(
   config.db.password,
   {
     host: config.db.host,
-    port: config.db.port,
-    dialect: config.db.dialect,
+    port: Number(config.db.port),
+    dialect: "mysql",
+
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: true,
+      },
+    },
+
     logging: config.env === "development" ? console.log : false,
+
     pool: {
       max: 5,
       min: 0,
@@ -22,14 +30,14 @@ const sequelize = new Sequelize(
 export const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Connection to database has been established successfully.");
-    // Sync models (in development, alter: true is safer than force: true)
+    console.log("✅ Connected to TiDB");
+
     if (config.env === "development") {
-      await sequelize.sync({ alter: true });
+      await sequelize.sync();
       console.log("✅ Database synchronized");
     }
   } catch (error) {
-    console.error("❌ Unable to connect to the database:", error);
+    console.error(error);
     process.exit(1);
   }
 };
