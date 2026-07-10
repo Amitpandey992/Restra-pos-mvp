@@ -37,10 +37,13 @@ export const authenticate = (
   }
   const token = authHeader.split(" ")[1];
   try {
-    const decoded = jwt.verify(token, config.jwt.secret) as any;
+    const decoded = jwt.verify(
+      token,
+      config.jwt.secret || "",
+    ) as TokenPayload;
     req.user = {
       ...decoded,
-      id: decoded.sub, // Ensure id is mapped from sub
+      id: decoded.sub,
     };
     next();
   } catch (error) {
