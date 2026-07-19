@@ -7,7 +7,7 @@ import * as otpService from "../services/otp.service";
 
 export const registerTenant = asyncHandler(
   async (req: Request, res: Response) => {
-    const result = await authService.registerTenant(req.body);
+    const result = await authService.registerTenant(req.body.tenant, req.body.user);
     res
       .status(201)
       .json(new ApiResponse(201, result, "Company registered successfully"));

@@ -4,18 +4,29 @@ import Tenant from "../models/Tenant";
 import Role from "../models/Role";
 import Plan from "../models/Plan";
 import { ApiError } from "../utils/ApiError";
-import * as tenantService from "./tenant.service";
-import * as userService from "./user.service";
 import * as tokenService from "./token.service";
 import * as otpService from "./otp.service";
 
-export const registerTenant = async (payload: any) => {
-  // payload should have { tenant: {...}, user: {...} }
+export const registerTenant = async (
+  tenantData: {
+    name: string;
+    phone?: string;
+    plan_id?: string;
+  },
+  userData: {
+    full_name: string;
+    email: string;
+    password: string;
+    phone?: string;
+    is_verified?: boolean;
+    is_active?: boolean;
+  },
+) => {
   const transaction = await sequelize.transaction();
   try {
     // 0. Check if user already exists
     const existingUser = await User.findOne({
-      where: { email: payload.user.email },
+      where: { email: userData.email },
     });
     if (existingUser) {
       throw new ApiError(
@@ -25,15 +36,22 @@ export const registerTenant = async (payload: any) => {
     }
 
     // 1. Create Tenant
-    // Validate Plan
-    const plan = await Plan.findByPk(payload.tenant.plan_id);
-    if (!plan) throw new ApiError(400, "Invalid Plan ID", [], "Tenant.plan_id");
+    // Validate Plan if provided and not empty
+    if (tenantData.plan_id) {
+      const plan = await Plan.findByPk(tenantData.plan_id);
+      if (!plan)
+        throw new ApiError(400, "Invalid Plan ID", [], "Tenant.plan_id");
+    }
 
-    const tenant = await Tenant.create(
+    // If plan_id is empty string, set it to null or undefined so it doesn't cause DB error for UUID
+    const planIdToSave = tenantData.plan_id || null;
+
+    const newTenant = await Tenant.create(
       {
-        ...payload.tenant,
+        ...tenantData,
+        plan_id: planIdToSave,
         subscription_end_date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days trial
-      },
+      } as any,
       { transaction },
     );
 
@@ -43,13 +61,13 @@ export const registerTenant = async (payload: any) => {
       throw new ApiError(500, 'System Role "OWNER" missing. Contact Admin.');
 
     // 3. Create User
-    const user = await User.create(
+    const newUser = await User.create(
       {
-        full_name: payload.user.full_name,
-        email: payload.user.email,
-        password: payload.user.password,
+        full_name: userData.full_name,
+        email: userData.email,
+        password: userData.password,
         role_id: ownerRole.id,
-        tenant_id: tenant.id,
+        tenant_id: newTenant.id,
         is_active: false,
         is_verified: false,
       },
@@ -57,11 +75,11 @@ export const registerTenant = async (payload: any) => {
     );
 
     // 4. Generate & Send OTP
-    await otpService.generateOTP(user.email, user.full_name);
+    await otpService.generateOTP(newUser.email, newUser.full_name);
 
     await transaction.commit();
 
-    return { user, tenant };
+    return { user: newUser, tenant: newTenant };
   } catch (error) {
     await transaction.rollback();
     throw error;
@@ -102,8 +120,6 @@ export const loginUser = async (email: string, password: string) => {
     }
   }
 
-  // 4. Update login time
-  user.last_login = new Date();
   await user.save();
 
   // 5. Generate Tokens

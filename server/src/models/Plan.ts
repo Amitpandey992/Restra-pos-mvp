@@ -4,7 +4,6 @@ import sequelize from "../config/database";
 interface PlanAttributes {
   id: string;
   name: string;
-  description: string;
   price: number;
   duration_days: number;
   features: any; // { room_booking: boolean, ... }
@@ -21,7 +20,6 @@ class Plan
 {
   public id!: string;
   public name!: string;
-  public description!: string;
   public price!: number;
   public duration_days!: number;
   public features!: any;
@@ -41,10 +39,7 @@ Plan.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      // unique: true, // Temporarily disabled to fix ER_TOO_MANY_KEYS
-    },
-    description: {
-      type: DataTypes.TEXT,
+      unique: true,
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),

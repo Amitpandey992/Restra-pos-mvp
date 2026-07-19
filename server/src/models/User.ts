@@ -12,7 +12,6 @@ interface UserAttributes {
   is_active: boolean;
   is_verified: boolean;
   created_by?: string;
-  last_login?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -32,7 +31,6 @@ class User
   public is_active!: boolean;
   public is_verified!: boolean;
   public created_by!: string;
-  public last_login!: Date;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -89,9 +87,6 @@ User.init(
     created_by: {
       type: DataTypes.UUID,
       allowNull: true, // Optional for those registered directly
-    },
-    last_login: {
-      type: DataTypes.DATE,
     },
   },
   {

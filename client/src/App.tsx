@@ -7,6 +7,7 @@ import {
 import { AuthProvider } from "./context/AuthContext";
 import { SocketProvider } from "./context/SocketContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import Tables from "./pages/Tables";
@@ -42,13 +43,13 @@ function App() {
           <Router>
             <Routes>
               {/* Public Routes */}
+              <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
 
-              {/* Protected Routes - Wrapped in Layout */}
               <Route element={<ProtectedRoute />}>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/tables" element={<Tables />} />
                 <Route path="/inventory" element={<Inventory />} />

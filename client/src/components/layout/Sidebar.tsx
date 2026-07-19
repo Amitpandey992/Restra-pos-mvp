@@ -15,12 +15,13 @@ import {
 import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
   {
     label: "Dashboard",
     icon: LayoutDashboard,
-    path: "/",
+    path: "/dashboard",
     roles: ["OWNER", "CASHIER", "SUPER_ADMIN"],
   },
   {
@@ -79,13 +80,11 @@ const NAV_ITEMS = [
   },
 ];
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const location = useLocation();
   const { user } = useAuth();
-
   const userRole = user?.Role?.name;
 
-  // Filter nav items based on user role
   const filteredNavItems = NAV_ITEMS.filter(
     (item) => !item.roles || item.roles.includes(userRole),
   );
@@ -93,29 +92,29 @@ const Sidebar = ({ isOpen, onClose }) => {
   return (
     <aside
       className={clsx(
-        "fixed inset-y-0 left-0 bg-white dark:bg-slate-900 border-r border-primary/10 flex flex-col h-full z-30 transition-all duration-300 lg:static lg:translate-x-0 w-72",
+        "fixed inset-y-0 left-0 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-white/10 flex flex-col h-full z-40 transition-all duration-500 lg:static lg:translate-x-0 w-72",
         isOpen
           ? "translate-x-0 shadow-2xl"
           : "-translate-x-full lg:translate-x-0",
       )}
     >
       <div className="p-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="size-10 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
-            <Utensils className="w-6 h-6" />
+        <Link to="/dashboard" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white shadow-glow group-hover:scale-105 transition-transform">
+            <Utensils className="w-5 h-5" />
           </div>
-          <div className="flex flex-col overflow-hidden">
-            <h1 className="font-bold text-slate-800 dark:text-white leading-tight truncate">
+          <div className="flex flex-col">
+            <h1 className="font-display font-bold text-slate-800 dark:text-white leading-tight">
               The Golden Bistro
             </h1>
-            <span className="text-xs font-medium text-primary uppercase tracking-wider truncate">
+            <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
               Restaurant POS
             </span>
           </div>
-        </div>
+        </Link>
       </div>
 
-      <nav className="flex-1 px-4 space-y-1 overflow-y-auto pt-4 no-scrollbar">
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto no-scrollbar">
         {filteredNavItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -125,20 +124,27 @@ const Sidebar = ({ isOpen, onClose }) => {
               onClick={() => {
                 if (window.innerWidth < 1024) onClose();
               }}
-              className={clsx(
-                "flex items-center gap-3 px-4 py-3 rounded-full font-medium transition-all group",
-                isActive
-                  ? "bg-primary text-white shadow-md shadow-primary/20"
-                  : "text-slate-600 dark:text-slate-400 hover:bg-primary/5 hover:text-primary",
-              )}
+              className="relative flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition-colors group overflow-hidden"
             >
+              {isActive && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-primary/10 dark:bg-primary/20 rounded-2xl border border-primary/20"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
               <item.icon
                 className={clsx(
-                  "w-6 h-6 shrink-0",
-                  isActive ? "text-white" : "text-current",
+                  "w-5 h-5 relative z-10 transition-colors",
+                  isActive ? "text-primary" : "text-slate-400 group-hover:text-primary"
                 )}
               />
-              <span className="truncate">{item.label}</span>
+              <span className={clsx(
+                "relative z-10 transition-colors",
+                isActive ? "text-primary font-bold" : "text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white"
+              )}>
+                {item.label}
+              </span>
             </Link>
           );
         })}

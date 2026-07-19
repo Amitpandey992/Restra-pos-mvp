@@ -24,8 +24,7 @@ async function seed() {
     // 1. Create Plans
     const basicPlan = await Plan.create({
       name: "Basic",
-      description: "Basic Plan for Small Businesses",
-      price: 29.99,
+      price: 399,
       duration_days: 30,
       features: { tables: 10, items: 50 },
       is_active: true,
@@ -59,7 +58,6 @@ async function seed() {
     // 3. Create Tenant
     const tenant = await Tenant.create({
       name: "Tasty Bytes",
-      address: "123 Food Street, Tech City",
       phone: "555-0199",
       plan_id: basicPlan.id,
       subscription_end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),

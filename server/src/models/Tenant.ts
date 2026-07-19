@@ -4,7 +4,6 @@ import sequelize from "../config/database";
 interface TenantAttributes {
   id: string; // This is the tenant_id
   name: string;
-  address: string;
   phone: string;
   plan_id: string; // FK to Plan
   subscription_end_date: Date;
@@ -22,7 +21,6 @@ class Tenant
 {
   public id!: string;
   public name!: string;
-  public address!: string;
   public phone!: string;
   public plan_id!: string;
   public subscription_end_date!: Date;
@@ -44,9 +42,6 @@ Tenant.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    address: {
-      type: DataTypes.STRING,
     },
     phone: {
       type: DataTypes.STRING,
