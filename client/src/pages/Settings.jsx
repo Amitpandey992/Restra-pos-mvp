@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUserProfile, logout } from "../api/authApi";
 import { User, Mail, Shield, LogOut, Building } from "lucide-react";
@@ -17,7 +16,7 @@ const Settings = () => {
     retry: 1,
   });
 
-  const user = userResponse?.data; // User info: { id, name, email, role, tenantId ... }
+  const user = userResponse?.data;
 
   const handleLogout = async () => {
     await logout();

@@ -8,16 +8,19 @@ export const validate =
       schema.parse(req.body);
       next();
     } catch (error: any) {
-      console.log(error);
       let message = "Validation Error";
-      let errors = [];
+      let errors: any[] = [];
 
-      if (error.errors) {
-        errors = error.errors.map((err: any) => ({
+      // Zod throws an error object that contains an 'issues' array (or 'errors' array)
+      const zodIssues = error.issues || error.errors;
+      if (Array.isArray(zodIssues)) {
+        errors = zodIssues.map((err: any) => ({
           field: err.path.join("."),
           message: err.message,
         }));
         message = errors.map((e: any) => `${e.field}: ${e.message}`).join(", ");
+      } else {
+        message = error.message || message;
       }
 
       next(new ApiError(400, message, errors));

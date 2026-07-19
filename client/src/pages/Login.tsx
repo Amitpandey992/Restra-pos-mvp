@@ -58,7 +58,7 @@ export default function Login() {
             <ChefHat size={28} />
           </div>
           <span className="font-display font-bold text-2xl text-white tracking-tight">
-            TastyBytes
+            Restora
           </span>
         </div>
 
@@ -101,7 +101,7 @@ export default function Login() {
 
         <div className="p-12 relative z-10">
           <div className="flex items-center gap-4 text-sm text-slate-500 font-medium">
-            <span>© {new Date().getFullYear()} TastyBytes</span>
+            <span>© {new Date().getFullYear()} Restora</span>
             <span>•</span>
             <a href="#" className="hover:text-primary transition-colors">
               Privacy

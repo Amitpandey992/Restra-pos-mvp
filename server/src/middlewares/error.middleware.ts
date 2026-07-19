@@ -9,7 +9,14 @@ export const errorHandler = (
 ) => {
   let error = err;
 
-  if (!(error instanceof ApiError)) {
+  if (
+    error.name === "SequelizeValidationError" ||
+    error.name === "SequelizeUniqueConstraintError"
+  ) {
+    const messages = error.errors.map((e: any) => e.message);
+    const message = messages.join(", ");
+    error = new ApiError(400, message, error.errors, error.stack);
+  } else if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || 500;
     const message = error.message || "Internal Server Error";
     error = new ApiError(statusCode, message, [], error.stack);

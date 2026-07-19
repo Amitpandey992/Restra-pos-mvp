@@ -80,8 +80,8 @@ const VerifyOtp: React.FC = () => {
     setLoading(true);
     try {
       await verifyOtp(email, otpString);
-      toast.success("Email verified successfully! You can now login.");
-      navigate("/login");
+      toast.success("Email verified successfully!");
+      navigate("/select-plan", { state: { email } });
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Verification failed");
     } finally {
@@ -162,7 +162,9 @@ const VerifyOtp: React.FC = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
                 type="text"
                 inputMode="numeric"
                 maxLength={1}

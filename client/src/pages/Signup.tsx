@@ -20,16 +20,12 @@ import {
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [plans, setPlans] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [formData, setFormData] = useState({
     tenant: {
       name: "",
-      address: "",
-      phone: "",
-      plan_id: "",
     },
     user: {
       full_name: "",
@@ -63,7 +59,7 @@ export default function Signup() {
     setLoading(true);
     try {
       await register(formData);
-      toast.success("Account created! Please verify your email.");
+      toast.success("OTP sent successfully. Check your email.");
       navigate("/verify-otp", { state: { email: formData.user.email } });
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Registration failed");
@@ -96,7 +92,7 @@ export default function Signup() {
             <ChefHat size={28} />
           </div>
           <span className="font-display font-bold text-2xl text-white tracking-tight">
-            TastyBytes
+            Restora
           </span>
         </div>
 
@@ -110,7 +106,7 @@ export default function Signup() {
               Start building your restaurant's future.
             </h1>
             <p className="text-slate-400 text-lg leading-relaxed mb-12">
-              Join thousands of visionary restaurateurs using TastyBytes to
+              Join thousands of visionary restaurateurs using Restora to
               streamline operations, delight customers, and scale effortlessly.
             </p>
 
@@ -139,7 +135,7 @@ export default function Signup() {
 
         <div className="p-12 relative z-10">
           <div className="flex items-center gap-4 text-sm text-slate-500 font-medium">
-            <span>© {new Date().getFullYear()} TastyBytes</span>
+            <span>© {new Date().getFullYear()} Restora</span>
             <span>•</span>
             <a href="#" className="hover:text-primary transition-colors">
               Privacy

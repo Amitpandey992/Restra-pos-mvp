@@ -44,7 +44,7 @@ export default function Landing() {
               <ChefHat size={24} />
             </div>
             <span className="font-display font-bold text-xl tracking-tight">
-              TastyBytes
+              Restora
             </span>
           </div>
           <div className="hidden md:flex items-center gap-8">
@@ -161,7 +161,7 @@ export default function Landing() {
             Everything you need to scale
           </h2>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-            Stop juggling multiple tools. TastyBytes brings your point-of-sale,
+            Stop juggling multiple tools. Restora brings your point-of-sale,
             inventory, and staff management into one beautiful interface.
           </p>
         </div>
@@ -245,7 +245,7 @@ export default function Landing() {
             </h2>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">
               Join thousands of forward-thinking restaurants that have upgraded
-              their operations with TastyBytes.
+              their operations with Restora.
             </p>
             <Link
               to="/signup"
@@ -263,11 +263,11 @@ export default function Landing() {
           <div className="flex items-center gap-2">
             <ChefHat size={20} className="text-primary" />
             <span className="font-display font-bold text-lg text-slate-900 dark:text-white">
-              TastyBytes
+              Restora
             </span>
           </div>
           <p className="text-sm">
-            © {new Date().getFullYear()} TastyBytes Inc. All rights reserved.
+            © {new Date().getFullYear()} Restora Inc. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="hover:text-primary transition-colors">

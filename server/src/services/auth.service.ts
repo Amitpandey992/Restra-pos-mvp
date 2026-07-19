@@ -2,7 +2,6 @@ import sequelize from "../config/database";
 import User from "../models/User";
 import Tenant from "../models/Tenant";
 import Role from "../models/Role";
-import Plan from "../models/Plan";
 import { ApiError } from "../utils/ApiError";
 import * as tokenService from "./token.service";
 import * as otpService from "./otp.service";
@@ -10,48 +9,36 @@ import * as otpService from "./otp.service";
 export const registerTenant = async (
   tenantData: {
     name: string;
-    phone?: string;
     plan_id?: string;
   },
   userData: {
     full_name: string;
     email: string;
     password: string;
-    phone?: string;
     is_verified?: boolean;
     is_active?: boolean;
   },
 ) => {
   const transaction = await sequelize.transaction();
   try {
-    // 0. Check if user already exists
     const existingUser = await User.findOne({
       where: { email: userData.email },
     });
     if (existingUser) {
       throw new ApiError(
         400,
-        "Email already registered. Please login or use a different email.",
+        "Email already registered. Please use a different email.",
       );
     }
 
     // 1. Create Tenant
-    // Validate Plan if provided and not empty
-    if (tenantData.plan_id) {
-      const plan = await Plan.findByPk(tenantData.plan_id);
-      if (!plan)
-        throw new ApiError(400, "Invalid Plan ID", [], "Tenant.plan_id");
-    }
-
-    // If plan_id is empty string, set it to null or undefined so it doesn't cause DB error for UUID
-    const planIdToSave = tenantData.plan_id || null;
-
     const newTenant = await Tenant.create(
       {
-        ...tenantData,
-        plan_id: planIdToSave,
-        subscription_end_date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days trial
-      } as any,
+        name: tenantData.name,
+        plan_id: tenantData.plan_id || null,
+        is_active: false,
+        subscription_end_date: new Date(0),
+      },
       { transaction },
     );
 
@@ -85,6 +72,8 @@ export const registerTenant = async (
     throw error;
   }
 };
+
+// export const purchasePlan = async ()
 
 export const loginUser = async (email: string, password: string) => {
   // 1. Find user

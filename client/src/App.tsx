@@ -21,6 +21,7 @@ import Team from "./pages/Team";
 import Login from "./pages/Login";
 import VerifyOtp from "./pages/VerifyOtp";
 import Signup from "./pages/Signup";
+import SelectPlan from "./pages/SelectPlan";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
@@ -46,6 +47,7 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/select-plan" element={<SelectPlan />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
 
               <Route element={<ProtectedRoute />}>

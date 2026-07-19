@@ -58,7 +58,6 @@ async function seed() {
     // 3. Create Tenant
     const tenant = await Tenant.create({
       name: "Tasty Bytes",
-      phone: "555-0199",
       plan_id: basicPlan.id,
       subscription_end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       is_active: true,

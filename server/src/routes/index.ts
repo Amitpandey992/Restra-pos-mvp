@@ -2,6 +2,7 @@ import { Router } from "express";
 import planRoutes from "./plan.routes";
 import tenantRoutes from "./tenant.routes";
 import authRoutes from "./auth.routes";
+import paymentRoutes from "./payment.routes";
 import tableRoutes from "./table.routes";
 import menuRoutes from "./menu.routes";
 import orderRoutes from "./order.routes";
@@ -17,6 +18,7 @@ const router = Router();
 
 
 router.use("/auth", authRoutes); // /api/v1/auth
+router.use("/payments", paymentRoutes); // /api/v1/payments
 router.use("/plans", planRoutes); // /api/v1/plans
 router.use("/tenants", tenantRoutes); // /api/v1/tenants
 router.use("/tables", tableRoutes); // /api/v1/tables

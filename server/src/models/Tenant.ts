@@ -4,8 +4,7 @@ import sequelize from "../config/database";
 interface TenantAttributes {
   id: string; // This is the tenant_id
   name: string;
-  phone: string;
-  plan_id: string; // FK to Plan
+  plan_id: string | null; // FK to Plan
   subscription_end_date: Date;
   settings: any; // { currency: 'USD', logo: '...' }
   is_active: boolean; // Subscription active?
@@ -21,8 +20,7 @@ class Tenant
 {
   public id!: string;
   public name!: string;
-  public phone!: string;
-  public plan_id!: string;
+  public plan_id!: string | null;
   public subscription_end_date!: Date;
   public settings!: any;
   public is_active!: boolean;
@@ -42,9 +40,6 @@ Tenant.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    phone: {
-      type: DataTypes.STRING,
     },
     plan_id: {
       type: DataTypes.UUID,

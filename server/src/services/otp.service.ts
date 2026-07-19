@@ -1,5 +1,4 @@
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 import Otp from "../models/Otp";
 import { ApiError } from "../utils/ApiError";
 import * as mailService from "./mail.service";
@@ -29,7 +28,7 @@ export const generateOTP = async (email: string, userName: string) => {
 
   // 4. Send Email
   const template = getOtpTemplate(otp, userName);
-  await mailService.sendEmail(email, "Your OTP for TastyBytes", template);
+  await mailService.sendEmail(email, "Your OTP for Restora", template);
 
   return true;
 };

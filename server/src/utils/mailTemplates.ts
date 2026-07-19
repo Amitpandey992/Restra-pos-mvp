@@ -11,7 +11,7 @@ export const getOtpTemplate = (otp: string, name: string) => {
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06);">
         <!-- Header -->
         <div style="background-color: #4f46e5; padding: 32px 24px; text-align: center;">
-          <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">TastyBytes</h1>
+          <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">Restora</h1>
         </div>
         
         <!-- Body -->
@@ -19,7 +19,7 @@ export const getOtpTemplate = (otp: string, name: string) => {
           <h2 style="color: #1e293b; margin: 0 0 20px; font-size: 22px; font-weight: 600;">Verify Your Email</h2>
           <p style="font-size: 16px; color: #475569; line-height: 1.6; margin: 0 0 24px;">
             Hi <strong>${name}</strong>,<br><br>
-            Thank you for joining <strong>TastyBytes</strong>. To complete your registration and secure your account, please use the following One-Time Password (OTP):
+            Thank you for joining <strong>Restora</strong>. To complete your registration and secure your account, please use the following One-Time Password (OTP):
           </p>
           
           <!-- OTP Box -->
@@ -40,7 +40,7 @@ export const getOtpTemplate = (otp: string, name: string) => {
         <!-- Footer -->
         <div style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 32px; text-align: center;">
           <p style="font-size: 13px; color: #64748b; margin: 0 0 8px;">
-            © ${new Date().getFullYear()} TastyBytes Restaurant Management System.
+            © ${new Date().getFullYear()} Restora Restaurant Management System.
           </p>
           <p style="font-size: 13px; color: #94a3b8; margin: 0;">
             All rights reserved.

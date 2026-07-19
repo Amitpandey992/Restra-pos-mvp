@@ -26,6 +26,7 @@
     "multer": "^2.0.2",
     "mysql2": "^3.17.1",
     "nodemailer": "^8.0.1",
+    "razorpay": "^2.9.8",
     "reflection": "^0.0.1",
     "sequelize": "^6.37.7",
     "socket.io": "^4.8.3",
