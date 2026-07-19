@@ -214,6 +214,139 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section
+        id="how-it-works"
+        className="py-24 px-6 max-w-7xl mx-auto relative z-10"
+      >
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            Get started in minutes
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+            We've made the transition as seamless as possible so you can focus
+            on what matters most — your food and your customers.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+          {/* Connecting Line */}
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2 -z-10" />
+
+          {[
+            {
+              step: "01",
+              title: "Create Account",
+              desc: "Sign up and select a plan that fits your restaurant's size. No credit card required for the trial.",
+            },
+            {
+              step: "02",
+              title: "Customize Menu",
+              desc: "Easily import your existing menu, setup your tables, and configure your staff roles.",
+            },
+            {
+              step: "03",
+              title: "Start Selling",
+              desc: "Train your staff in minutes with our intuitive POS and watch your operations streamline instantly.",
+            },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
+              className="relative flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 rounded-full glass-card border-2 border-primary flex items-center justify-center text-2xl font-bold font-display text-primary shadow-glow mb-6 bg-background-light dark:bg-[#09090b]">
+                {item.step}
+              </div>
+              <h3 className="text-2xl font-bold mb-3 font-display">
+                {item.title}
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24 px-6 relative z-10">
+        <div className="absolute inset-0 bg-primary/5 -skew-y-3 -z-10" />
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Loved by restaurant owners
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+              Don't just take our word for it. See how Restora is transforming
+              businesses around the globe.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                quote:
+                  "Restora completely revolutionized our kitchen flow. Order times dropped by 30% in the first week.",
+                author: "Sarah Jenkins",
+                role: "Owner, The Rustic Spoon",
+                avatar: "https://i.pravatar.cc/150?u=sarah",
+              },
+              {
+                quote:
+                  "The inventory analytics alone paid for the subscription. We've significantly reduced food waste.",
+                author: "Michael Chen",
+                role: "Executive Chef, Golden Dragon",
+                avatar: "https://i.pravatar.cc/150?u=michael",
+              },
+              {
+                quote:
+                  "Finally, a POS that doesn't look like it was built in 1995. My staff learned how to use it in 10 minutes.",
+                author: "Elena Rodriguez",
+                role: "Manager, Cafe Bella",
+                avatar: "https://i.pravatar.cc/150?u=elena",
+              },
+            ].map((testimonial, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card rounded-3xl p-8 relative"
+              >
+                <div className="flex text-amber-400 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={18} fill="currentColor" />
+                  ))}
+                </div>
+                <p className="text-lg text-slate-700 dark:text-slate-300 italic mb-8 font-medium">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center gap-4 mt-auto">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.author}
+                    className="w-12 h-12 rounded-full border-2 border-primary/20"
+                  />
+                  <div>
+                    <h4 className="font-bold text-slate-900 dark:text-white">
+                      {testimonial.author}
+                    </h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof */}
       <section className="py-24 border-y border-white/5 bg-black/5 dark:bg-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-6 text-center">
