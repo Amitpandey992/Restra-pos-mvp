@@ -1,27 +1,31 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
   ChefHat,
   BarChart3,
-  Clock,
+  Users,
   ShieldCheck,
-  Smartphone,
-  Star,
-  Utensils,
+  Zap,
+  CheckCircle2,
 } from "lucide-react";
+
+import { SplitText } from "../components/react-bits/SplitText";
+import ElectricBorder from "../components/react-bits/ElectricBorder";
+import MagicBento from "../components/react-bits/MagicBento";
+import SplashCursor from "../components/react-bits/SplashCursor";
+import GridScan from "../components/react-bits/GridScan";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9] },
 };
 
 const stagger = {
   animate: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
     },
   },
 };
@@ -29,385 +33,403 @@ const stagger = {
 export default function Landing() {
   return (
     <div className="min-h-screen bg-background-light dark:bg-[#09090b] text-slate-900 dark:text-slate-100 font-sans selection:bg-primary/30 overflow-hidden relative">
+      <SplashCursor RAINBOW_MODE={false} COLOR="#6366f1" />
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 inset-x-0 h-screen overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute -top-[40%] -right-[10%] w-[70%] h-[70%] rounded-full bg-primary/20 blur-[120px]" />
-        <div className="absolute top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]" />
+      <div className="absolute top-0 inset-x-0 h-[100vh] overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute -top-[30%] -right-[10%] w-[60%] h-[60%] rounded-full bg-primary/20 blur-[140px]" />
+        <div className="absolute top-[20%] -left-[10%] w-[40%] h-[40%] rounded-full bg-violet-600/15 blur-[140px]" />
+      </div>
+
+      {/* Grid Pattern using requested utility */}
+      <div className="absolute inset-0 pointer-events-none -z-20">
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#1e293b"
+          gridScale={0.1}
+          scanColor="#6366f1"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+        />
       </div>
 
       {/* Navbar */}
-      <nav className="fixed top-0 inset-x-0 z-50 glass border-b-0 border-white/10">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white shadow-glow">
-              <ChefHat size={24} />
+      <nav className="fixed top-0 inset-x-0 z-50 glass border-b border-white/10 dark:border-white/5">
+        <div className="app-container h-16 md:h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white shadow-glow">
+              <ChefHat size={22} />
             </div>
-            <span className="font-display font-bold text-xl tracking-tight">
+            <span className="font-display font-bold text-lg md:text-xl tracking-tight">
               Restora
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             <a
               href="#features"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+              className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
             >
               Features
             </a>
             <a
-              href="#how-it-works"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+              href="#pricing"
+              className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
             >
-              How it Works
+              Pricing
             </a>
             <a
-              href="#testimonials"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+              href="#contact"
+              className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
             >
-              Testimonials
+              Contact
             </a>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <Link
               to="/login"
-              className="text-sm font-semibold hidden md:block hover:text-primary transition-colors"
+              className="text-sm font-semibold hidden md:block hover:text-primary transition-colors text-slate-600 dark:text-slate-300"
             >
-              Sign In
+              Log in
             </Link>
             <Link
               to="/signup"
-              className="px-5 py-2.5 rounded-full bg-primary hover:bg-primary-600 text-white text-sm font-semibold shadow-glow transition-all hover:scale-105 active:scale-95"
+              className="px-5 py-2 md:py-2.5 rounded-full bg-primary hover:bg-primary/90 text-white text-sm font-semibold shadow-glow transition-all active:scale-95"
             >
-              Get Started
+              Start Free Trial
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center relative">
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={stagger}
-          className="max-w-4xl space-y-8"
-        >
+      <section className="pt-40 md:pt-48 pb-20 md:pb-32 px-6 flex flex-col items-center text-center relative">
+        <div className="app-container">
           <motion.div
-            variants={fadeIn}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-sm font-semibold mb-4"
+            initial="initial"
+            animate="animate"
+            variants={stagger}
+            className="max-w-4xl mx-auto space-y-8 flex flex-col items-center"
           >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            The Future of Restaurant Management
-          </motion.div>
-          <motion.h1
-            variants={fadeIn}
-            className="text-5xl md:text-7xl font-display font-bold leading-tight tracking-tight"
-          >
-            Run your restaurant <br className="hidden md:block" />
-            <span className="text-gradient">with perfect precision.</span>
-          </motion.h1>
-          <motion.p
-            variants={fadeIn}
-            className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            Elevate your culinary business with a world-class POS, inventory
-            management, and real-time analytics platform built for modern
-            restaurants.
-          </motion.p>
-          <motion.div
-            variants={fadeIn}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
-          >
-            <Link
-              to="/signup"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary hover:bg-primary-600 text-white font-semibold flex items-center justify-center gap-2 shadow-glow transition-all hover:scale-105"
-            >
-              Start Free Trial <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/login"
-              className="w-full sm:w-auto px-8 py-4 rounded-full glass-card hover:bg-white/60 dark:hover:bg-slate-800/60 font-semibold transition-all"
-            >
-              Book a Demo
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Dashboard Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-20 w-full relative"
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-background-light dark:from-[#09090b] via-transparent to-transparent z-10" />
-          <div className="relative rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 glass-card p-2 md:p-4">
-            <img
-              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200"
-              alt="Dashboard Preview"
-              className="w-full h-auto rounded-xl md:rounded-2xl opacity-80"
-            />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Features Section */}
-      <section
-        id="features"
-        className="py-24 px-6 max-w-7xl mx-auto relative z-10"
-      >
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Everything you need to scale
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-            Stop juggling multiple tools. Restora brings your point-of-sale,
-            inventory, and staff management into one beautiful interface.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: BarChart3,
-              title: "Real-time Analytics",
-              desc: "Make decisions based on live data. Track sales, popular items, and staff performance instantly.",
-              color: "text-blue-500",
-              bg: "bg-blue-500/10",
-            },
-            {
-              icon: Clock,
-              title: "Lightning Fast POS",
-              desc: "Process orders in seconds. Our optimized interface ensures your staff never keeps customers waiting.",
-              color: "text-primary",
-              bg: "bg-primary/10",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Enterprise Security",
-              desc: "Bank-grade encryption protects your business data. Role-based access ensures staff only see what they need.",
-              color: "text-emerald-500",
-              bg: "bg-emerald-500/10",
-            },
-          ].map((feature, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card rounded-3xl p-8 hover:-translate-y-2 transition-transform duration-300 group"
+              variants={fadeIn}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs md:text-sm font-semibold tracking-wide"
             >
-              <div
-                className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+              Welcome to Restora
+            </motion.div>
+            <motion.h1
+              variants={fadeIn}
+              className="text-5xl md:text-7xl lg:text-[5.5rem] font-display font-bold leading-[1.1] tracking-tight"
+            >
+              <SplitText text="Restaurant Management," className="block" />
+              <span className="text-gradient block mt-2">Perfected.</span>
+            </motion.h1>
+            <motion.p
+              variants={fadeIn}
+              className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            >
+              Unify your front-of-house, kitchen, and back-office with our
+              lightning-fast, highly intuitive operations platform. Built for
+              modern hospitality.
+            </motion.p>
+            <motion.div
+              variants={fadeIn}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full sm:w-auto"
+            >
+              <Link
+                to="/signup"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold flex items-center justify-center gap-2 shadow-glow transition-all active:scale-95"
               >
-                <feature.icon className={`w-7 h-7 ${feature.color}`} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 font-display">
-                {feature.title}
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                {feature.desc}
-              </p>
+                Start Free Trial <ArrowRight size={18} />
+              </Link>
+              <Link
+                to="/login"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 font-semibold transition-all active:scale-95"
+              >
+                Book a Demo
+              </Link>
             </motion.div>
-          ))}
+          </motion.div>
+
+          {/* Dashboard Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 80, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0.4,
+              ease: [0.2, 0.65, 0.3, 0.9],
+            }}
+            className="mt-20 md:mt-28 w-full max-w-6xl mx-auto relative perspective-[2000px]"
+          >
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background-light dark:from-[#09090b] to-transparent z-10" />
+
+            <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 glass p-2 md:p-3 transform-gpu">
+              <div className="bg-[#111] rounded-[1.5rem] overflow-hidden border border-white/5 relative">
+                {/* Subtle top reflection */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                <img
+                  src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1600"
+                  alt="Dashboard Preview"
+                  className="w-full h-auto opacity-90 object-cover"
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section
-        id="how-it-works"
-        className="py-24 px-6 max-w-7xl mx-auto relative z-10"
-      >
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Get started in minutes
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-            We've made the transition as seamless as possible so you can focus
-            on what matters most — your food and your customers.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          {/* Connecting Line */}
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-1/2 -z-10" />
-
-          {[
-            {
-              step: "01",
-              title: "Create Account",
-              desc: "Sign up and select a plan that fits your restaurant's size. No credit card required for the trial.",
-            },
-            {
-              step: "02",
-              title: "Customize Menu",
-              desc: "Easily import your existing menu, setup your tables, and configure your staff roles.",
-            },
-            {
-              step: "03",
-              title: "Start Selling",
-              desc: "Train your staff in minutes with our intuitive POS and watch your operations streamline instantly.",
-            },
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-              className="relative flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 rounded-full glass-card border-2 border-primary flex items-center justify-center text-2xl font-bold font-display text-primary shadow-glow mb-6 bg-background-light dark:bg-[#09090b]">
-                {item.step}
-              </div>
-              <h3 className="text-2xl font-bold mb-3 font-display">
-                {item.title}
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                {item.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 px-6 relative z-10">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 -z-10" />
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Loved by restaurant owners
+      {/* Features Section (Bento Grid) */}
+      <section id="features" className="py-24 md:py-32 relative z-10">
+        <div className="app-container">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 tracking-tight">
+              A unified operating system
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
-              Don't just take our word for it. See how Restora is transforming
-              businesses around the globe.
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg md:text-xl">
+              Everything you need to run your venue seamlessly, elegantly
+              designed into a single, cohesive platform.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                quote:
-                  "Restora completely revolutionized our kitchen flow. Order times dropped by 30% in the first week.",
-                author: "Sarah Jenkins",
-                role: "Owner, The Rustic Spoon",
-                avatar: "https://i.pravatar.cc/150?u=sarah",
-              },
-              {
-                quote:
-                  "The inventory analytics alone paid for the subscription. We've significantly reduced food waste.",
-                author: "Michael Chen",
-                role: "Executive Chef, Golden Dragon",
-                avatar: "https://i.pravatar.cc/150?u=michael",
-              },
-              {
-                quote:
-                  "Finally, a POS that doesn't look like it was built in 1995. My staff learned how to use it in 10 minutes.",
-                author: "Elena Rodriguez",
-                role: "Manager, Cafe Bella",
-                avatar: "https://i.pravatar.cc/150?u=elena",
-              },
-            ].map((testimonial, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="glass-card rounded-3xl p-8 relative"
-              >
-                <div className="flex text-amber-400 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-lg text-slate-700 dark:text-slate-300 italic mb-8 font-medium">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-4 mt-auto">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.author}
-                    className="w-12 h-12 rounded-full border-2 border-primary/20"
-                  />
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white">
-                      {testimonial.author}
-                    </h4>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="max-w-6xl mx-auto w-full">
+            <MagicBento
+              textAutoHide={false}
+              enableStars={true}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              enableTilt={true}
+              enableMagnetism={true}
+              clickEffect={true}
+              spotlightRadius={300}
+              particleCount={15}
+              glowColor="99, 102, 241"
+              cardData={[
+                {
+                  title: "Real-Time Kitchen Sync",
+                  description:
+                    "Orders fire instantly to the kitchen display system. No delays, no lost tickets. Just perfect synchronization between front and back of house.",
+                  label: "Operations",
+                },
+                {
+                  title: "Smart Inventory",
+                  description:
+                    "Automated tracking, low-stock alerts, and predictive ordering. Never run out of your best-sellers again.",
+                  label: "Management",
+                },
+                {
+                  title: "Multi-Branch RBAC",
+                  description:
+                    "Enterprise-grade roles and permissions. Manage access across multiple locations with granular control.",
+                  label: "Security",
+                },
+                {
+                  title: "Staff Management",
+                  description:
+                    "Scheduling, time-tracking, and payroll integrations built directly into the POS. Manage your team as effortlessly as your menu.",
+                  label: "Team",
+                },
+              ]}
+            />
           </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-24 border-y border-white/5 bg-black/5 dark:bg-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-8">
-            Trusted by top restaurants worldwide
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {/* Logos placeholders */}
-            <div className="flex items-center gap-2 text-xl font-bold font-display">
-              <Smartphone /> GastroTech
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 md:py-32 relative z-10">
+        <div className="app-container">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 tracking-tight">
+              Simple, transparent pricing
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg md:text-xl">
+              No hidden fees, no long-term contracts. Start small and upgrade as
+              you grow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+            {/* Starter */}
+            <div className="glass-card rounded-[2rem] p-8 md:p-10 border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-slate-900/40">
+              <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400 mb-2">
+                Starter
+              </h3>
+              <div className="flex items-baseline gap-1 mb-6">
+                <span className="text-4xl md:text-5xl font-bold">$49</span>
+                <span className="text-slate-500">/mo</span>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-8 h-10">
+                Perfect for food trucks and small cafes.
+              </p>
+              <Link
+                to="/signup"
+                className="block w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-white/10 text-center font-medium hover:bg-slate-50 dark:hover:bg-white/5 transition-colors mb-8"
+              >
+                Get Started
+              </Link>
+              <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> 1 Location
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> 2 Terminals
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Basic
+                  Analytics
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Email
+                  Support
+                </li>
+              </ul>
             </div>
-            <div className="flex items-center gap-2 text-xl font-bold font-display">
-              <Utensils /> BistroPrime
-            </div>
-            <div className="flex items-center gap-2 text-xl font-bold font-display">
-              <Star /> CulinaryPro
+
+            {/* Professional (Highlighted) */}
+            <ElectricBorder
+              color="#6366f1"
+              speed={1}
+              chaos={0.15}
+              borderRadius={32}
+              className="md:-my-4 z-10 scale-100 md:scale-105 shadow-2xl shadow-primary/20"
+            >
+              <div className="glass-card rounded-[2rem] p-8 md:p-10 relative overflow-hidden bg-white/80 dark:bg-slate-900/80 h-full w-full border-0">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 blur-3xl rounded-full" />
+
+                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide uppercase mb-6">
+                  Most Popular
+                </div>
+                <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
+                  Professional
+                </h3>
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-4xl md:text-5xl font-bold">$129</span>
+                  <span className="text-slate-500">/mo</span>
+                </div>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-8 h-10">
+                  For established restaurants needing full power.
+                </p>
+                <Link
+                  to="/signup"
+                  className="block w-full py-3 px-4 rounded-xl bg-primary text-white text-center font-semibold hover:bg-primary/90 shadow-glow transition-all mb-8"
+                >
+                  Get Started
+                </Link>
+                <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-200 font-medium">
+                  <li className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> Up to 3
+                    Locations
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> Unlimited
+                    Terminals
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> Advanced
+                    Inventory
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> Staff
+                    Management
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> 24/7
+                    Priority Support
+                  </li>
+                </ul>
+              </div>
+            </ElectricBorder>
+
+            {/* Enterprise */}
+            <div className="glass-card rounded-[2rem] p-8 md:p-10 border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-slate-900/40">
+              <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400 mb-2">
+                Enterprise
+              </h3>
+              <div className="flex items-baseline gap-1 mb-6">
+                <span className="text-4xl md:text-5xl font-bold">Custom</span>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-8 h-10">
+                For large chains and franchise operations.
+              </p>
+              <Link
+                to="/contact"
+                className="block w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-white/10 text-center font-medium hover:bg-slate-50 dark:hover:bg-white/5 transition-colors mb-8"
+              >
+                Contact Sales
+              </Link>
+              <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Unlimited
+                  Locations
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Custom
+                  Integrations
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Dedicated
+                  Success Manager
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" /> Custom RBAC
+                  Roles
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6 relative z-10">
-        <div className="max-w-5xl mx-auto glass-card rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-violet-600/20 z-0" />
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Ready to transform your restaurant?
-            </h2>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">
-              Join thousands of forward-thinking restaurants that have upgraded
-              their operations with Restora.
-            </p>
-            <Link
-              to="/signup"
-              className="inline-flex px-10 py-5 rounded-full bg-primary hover:bg-primary-600 text-white text-lg font-bold shadow-glow transition-all hover:scale-105"
-            >
-              Get Started for Free
-            </Link>
+      <section className="py-24 md:py-32 relative z-10">
+        <div className="app-container">
+          <div className="max-w-5xl mx-auto glass rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden border border-white/10 dark:border-white/5">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-violet-600/10 z-0" />
+
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
+                Ready to elevate your operations?
+              </h2>
+              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10">
+                Join the fastest-growing network of forward-thinking restaurants
+                standardizing on Restora.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  to="/signup"
+                  className="w-full sm:w-auto px-10 py-4 rounded-full bg-primary hover:bg-primary/90 text-white text-lg font-semibold shadow-glow transition-all active:scale-95"
+                >
+                  Start Your Free Trial
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-12 px-6 relative z-10 text-slate-600 dark:text-slate-400">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <footer className="border-t border-slate-200 dark:border-white/10 py-12 px-6 relative z-10 text-slate-600 dark:text-slate-400 bg-slate-50/50 dark:bg-[#09090b]">
+        <div className="app-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <ChefHat size={20} className="text-primary" />
-            <span className="font-display font-bold text-lg text-slate-900 dark:text-white">
+            <span className="font-display font-bold text-lg text-slate-900 dark:text-white tracking-tight">
               Restora
             </span>
           </div>
           <p className="text-sm">
             © {new Date().getFullYear()} Restora Inc. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm">
+          <div className="flex gap-8 text-sm font-medium">
             <a href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
+              Twitter
             </a>
             <a href="#" className="hover:text-primary transition-colors">
-              Terms of Service
+              GitHub
+            </a>
+            <a href="#" className="hover:text-primary transition-colors">
+              Terms
             </a>
           </div>
         </div>
